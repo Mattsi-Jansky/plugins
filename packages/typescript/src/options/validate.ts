@@ -62,21 +62,21 @@ export function validatePaths(
         const fromRollupDirToTs = relative(outputDir, compilerOptions[dirProperty]!);
         if (fromRollupDirToTs.startsWith('..')) {
           context.error(
-            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside Rollup 'dir' option.`
+            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside Rollup 'dir' option. Provided path was '${compilerOptions[dirProperty]!}', resulting in relative final path '${fromRollupDirToTs}' which needs to be but is not inside 'dir' option path '${outputDir}'.`
           );
         }
       } else if (dirProperty === 'outDir') {
         const fromTsDirToRollup = relative(compilerOptions[dirProperty]!, outputDir);
         if (fromTsDirToRollup.startsWith('..')) {
           context.error(
-            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside the same directory as the Rollup 'file' option.`
+            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside the same directory as the Rollup 'file' option. Provided path was '${compilerOptions[dirProperty]!}', resulting in relative final path '${fromTsDirToRollup}' which needs to be but is not inside 'dir' option path '${outputDir}'.`
           );
         }
       } else {
         const fromTsDirToRollup = relative(outputDir, compilerOptions[dirProperty]!);
         if (fromTsDirToRollup.startsWith('..')) {
           context.error(
-            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside the same directory as the Rollup 'file' option.`
+            `@rollup/plugin-typescript: Path of Typescript compiler option '${dirProperty}' must be located inside the same directory as the Rollup 'file' option. Provided path was '${compilerOptions[dirProperty]!}', resulting in relative final path '${fromTsDirToRollup}' which needs to be but is not inside 'dir' option path '${outputDir}'.`
           );
         }
       }
